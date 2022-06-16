@@ -85,12 +85,12 @@ def handle_error(err):
 
 
 @app.errorhandler(404)
-def handle_404():
+def handle_404(err):
 
     return jsonify({'message': 'This page not found!!'}), 400
 
 
 @app.errorhandler(400)
-def handle_400():
+def handle_400(err):
 
     return jsonify({'message': 'This request is bad. Please, try again!!'}), 400

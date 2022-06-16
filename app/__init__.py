@@ -4,12 +4,20 @@ from flask_sqlalchemy import SQLAlchemy
 from config import Config
 
 
-app = Flask(__name__)
-
-app.config.from_object(Config)
-
-db = SQLAlchemy(app)
-migrate = Migrate(app, db)
+db = SQLAlchemy()
+migrate = Migrate()
 
 
-from app import views, models
+def create_app():
+    app = Flask(__name__)
+    app.config.from_object(Config)
+    db.init_app(app)
+    migrate.init_app(app, db)
+
+    return app
+
+
+app = create_app()
+
+
+from app import models, views
