@@ -49,7 +49,7 @@ def update_task(task_id, **kwargs):
         return jsonify({'message': f'No task with id = {task_id}'})
     try:
         for key, value in kwargs.items():
-            setattr(task, key, value)  # устанавливаем по ключу значение в user
+            setattr(task, key, value)
         db.session.commit()
     except exc.SQLAlchemyError as e:
         db.session.rollback()
